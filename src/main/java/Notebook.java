@@ -11,6 +11,23 @@ public class Notebook extends DispositivoTecnologico {
         this.bateria = bateria;
     }
 
+    @Override
+    public String obtenerEspecificaciones() {
+        String especificaciones = "Marca: " + getMarca() +
+                "\nMemoria RAM: " + getMemoriaRAM() + "GB" +
+                "\nMemoria de Almacenamiento: " + getMemoriaAlmacenamiento() + "GB" +
+                "\nProcesador: " + getProcesador() +
+                "\nModelo: " + getModelo() +
+                "\nAño de Fabricación: " + getAñoFabricacion() +
+                "\nPrecio: $" + getPrecio() +
+                "\nCantidad en Stock: " + getCantidadStock() +
+                "\nResolución de Pantalla: " + resolucionPantalla +
+                "\nTipo de Teclado: " + tipoTeclado +
+                "\nBatería: " + bateria + "mAh";
+
+        return especificaciones;
+    }
+
     public String getResolucionPantalla() {
         return resolucionPantalla;
     }

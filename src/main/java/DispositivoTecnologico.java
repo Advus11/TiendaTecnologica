@@ -1,4 +1,4 @@
-public class DispositivoTecnologico {
+public abstract class DispositivoTecnologico {
     private String marca;
     private int memoriaRAM;
     private int memoriaAlmacenamiento;
@@ -18,6 +18,8 @@ public class DispositivoTecnologico {
         this.precio = precio;
         this.cantidadStock = cantidadStock;
     }
+
+    public abstract String obtenerEspecificaciones();
 
     public String getMarca() {
         return marca;

@@ -11,6 +11,22 @@ public class Tablet extends DispositivoTecnologico {
         this.accesoriosIncorporados = accesoriosIncorporados;
     }
 
+    @Override
+    public String obtenerEspecificaciones() {
+        String especificaciones = "Marca: " + getMarca() +
+                "\nMemoria RAM: " + getMemoriaRAM() + "GB" +
+                "\nMemoria de Almacenamiento: " + getMemoriaAlmacenamiento() + "GB" +
+                "\nProcesador: " + getProcesador() +
+                "\nModelo: " + getModelo() +
+                "\nAño de Fabricación: " + getAñoFabricacion() +
+                "\nPrecio: $" + getPrecio() +
+                "\nCantidad en Stock: " + getCantidadStock() +
+                "\nResolución de Pantalla: " + resolucionPantalla +
+                "\nAccesorios Incorporados: " + accesoriosIncorporados;
+
+        return especificaciones;
+    }
+
     public String getResolucionPantalla() {
         return resolucionPantalla;
     }

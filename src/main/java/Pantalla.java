@@ -9,6 +9,13 @@ public class Pantalla {
         this.año = año;
     }
 
+    public String obtenerEspecificaciones() {
+        String especificaciones = "Marca: " + marca +
+                "\nModelo: " + modelo +
+                "\nAño: " + año;
+
+        return especificaciones;
+    }
     public String getMarca() {
         return marca;
     }
