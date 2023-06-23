@@ -20,7 +20,7 @@ public class Computador extends DispositivoTecnologico {
                 "\nMemoria de Almacenamiento: " + getMemoriaAlmacenamiento() + "GB" +
                 "\nProcesador: " + getProcesador() +
                 "\nModelo: " + getModelo() +
-                "\nAño de Fabricación: " + getAñoFabricacion() +
+                "\nAno de Fabricacion: " + getAñoFabricacion() +
                 "\nPrecio: $" + getPrecio() +
                 "\nCantidad en Stock: " + getCantidadStock() +
                 "\nTarjeta de Video: " + tarjetaVideo +

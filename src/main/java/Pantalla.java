@@ -12,7 +12,7 @@ public class Pantalla {
     public String obtenerEspecificaciones() {
         String especificaciones = "Marca: " + marca +
                 "\nModelo: " + modelo +
-                "\nAño: " + año;
+                "\nAno: " + año;
 
         return especificaciones;
     }
