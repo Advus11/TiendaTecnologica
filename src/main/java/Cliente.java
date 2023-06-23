@@ -38,6 +38,4 @@ public class Cliente {
     public String getCiudad() {
         return ciudad;
     }
-
-    // Otros métodos y atributos de la clase Cliente
 }
