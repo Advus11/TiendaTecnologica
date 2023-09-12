@@ -1,18 +1,18 @@
 public class Pantalla {
     private String marca;
     private String modelo;
-    private int año;
+    private int ano;
 
-    public Pantalla(String marca, String modelo, int año) {
+    public Pantalla(String marca, String modelo, int ano) {
         this.marca = marca;
         this.modelo = modelo;
-        this.año = año;
+        this.ano = ano;
     }
 
     public String obtenerEspecificaciones() {
         String especificaciones = "Marca: " + marca +
                 "\nModelo: " + modelo +
-                "\nAno: " + año;
+                "\nAno: " + ano;
 
         return especificaciones;
     }
@@ -24,7 +24,7 @@ public class Pantalla {
         return modelo;
     }
 
-    public int getAño() {
-        return año;
+    public int getAno() {
+        return ano;
     }
 }

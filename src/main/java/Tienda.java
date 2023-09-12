@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.io.*;
 
 public class Tienda {
     private String direccion;
     private List<DispositivoTecnologico> catalogo;
     private List<Cliente> clientes;
+    private final String archivoCatalogo = "catalogo.txt"; // Nombre del archivo para el catálogo
 
     public Tienda() {
         this.direccion = direccion;
@@ -62,6 +64,105 @@ public class Tienda {
             }
         }
         return dispositivosEncontrados;
+    }
+    public void guardarCatalogoEnArchivo() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(archivoCatalogo))) {
+            for (DispositivoTecnologico dispositivo : catalogo) {
+                writer.println(dispositivo.getClass().getSimpleName());
+                writer.print(dispositivo.getMarca() + "/");
+                writer.print(dispositivo.getMemoriaRAM() + "/");
+                writer.print(dispositivo.getMemoriaAlmacenamiento() + "/");
+                writer.print(dispositivo.getProcesador() + "/");
+                writer.print(dispositivo.getModelo() + "/");
+                writer.print(dispositivo.getAnoFabricacion() + "/");
+                writer.print(dispositivo.getPrecio() + "/");
+                writer.print(dispositivo.getCantidadStock() + "/");
+
+                if (dispositivo instanceof Computador) {
+                    Computador computador = (Computador) dispositivo;
+                    writer.print(computador.getTarjetaVideo() + "/");
+                    writer.print(computador.getFuentePoder() + "/");
+                    writer.print(computador.getChasis() + "/");
+                    Pantalla pantalla = computador.getPantallaAsociada();
+                    writer.print(pantalla.getMarca() + "/");
+                    writer.print(pantalla.getModelo() + "/");
+                    writer.print(pantalla.getAno());
+                } else if (dispositivo instanceof Notebook) {
+                    Notebook notebook = (Notebook) dispositivo;
+                    writer.print(notebook.getResolucionPantalla() + "/");
+                    writer.print(notebook.getTipoTeclado() + "/");
+                    writer.print(notebook.getBateria());
+                } else if (dispositivo instanceof Tablet) {
+                    Tablet tablet = (Tablet) dispositivo;
+                    writer.print(tablet.getResolucionPantalla() + "/");
+                    List<String> accesorios = tablet.getAccesoriosIncorporados();
+                    writer.print(accesorios.size() + "/");
+                    for (String accesorio : accesorios) {
+                        writer.print(accesorio + "/");
+                    }
+                }
+                writer.println(); // Nueva línea para separar dispositivos
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para cargar el catálogo desde un archivo txt
+    public void cargarCatalogoDesdeArchivo() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivoCatalogo))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String tipo = line;
+                String[] atributos = reader.readLine().split("/"); // Dividir los atributos por "/"
+                String marca = atributos[0];
+                int memoriaRAM = Integer.parseInt(atributos[1]);
+                int memoriaAlmacenamiento = Integer.parseInt(atributos[2]);
+                String procesador = atributos[3];
+                String modelo = atributos[4];
+                int anoFabricacion = Integer.parseInt(atributos[5]);
+                double precio = Double.parseDouble(atributos[6]);
+                int cantidadStock = Integer.parseInt(atributos[7]);
+
+                if (tipo.equals("Computador")) {
+                    String tarjetaVideo = atributos[8];
+                    String fuentePoder = atributos[9];
+                    String chasis = atributos[10];
+                    String pantallaMarca = atributos[11];
+                    String pantallaModelo = atributos[12];
+                    int pantallaAno = Integer.parseInt(atributos[13]);
+
+                    Pantalla pantalla = new Pantalla(pantallaMarca, pantallaModelo, pantallaAno);
+                    Computador computador = new Computador(marca, memoriaRAM, memoriaAlmacenamiento, procesador, modelo,
+                            anoFabricacion, precio, cantidadStock, tarjetaVideo, fuentePoder, chasis, pantalla);
+
+                    catalogo.add(computador);
+                } else if (tipo.equals("Notebook")) {
+                    String resolucionPantalla = atributos[8];
+                    String tipoTeclado = atributos[9];
+                    int bateria = Integer.parseInt(atributos[10]);
+
+                    Notebook notebook = new Notebook(marca, memoriaRAM, memoriaAlmacenamiento, procesador, modelo,
+                            anoFabricacion, precio, cantidadStock, resolucionPantalla, tipoTeclado, bateria);
+
+                    catalogo.add(notebook);
+                } else if (tipo.equals("Tablet")) {
+                    String resolucionPantalla = atributos[8];
+                    int numAccesorios = Integer.parseInt(atributos[9]);
+                    List<String> accesorios = new ArrayList<>();
+                    for (int i = 0; i < numAccesorios; i++) {
+                        accesorios.add(atributos[10 + i]);
+                    }
+
+                    Tablet tablet = new Tablet(marca, memoriaRAM, memoriaAlmacenamiento, procesador, modelo,
+                            anoFabricacion, precio, cantidadStock, resolucionPantalla, accesorios);
+
+                    catalogo.add(tablet);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //Getter
